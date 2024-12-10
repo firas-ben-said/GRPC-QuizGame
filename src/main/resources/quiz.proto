@@ -1,0 +1,58 @@
+syntax = "proto3";
+package quiz;
+
+// Quiz structure
+message Quiz {
+  int64 id = 1;
+  string question = 2;
+  repeated string options = 3;
+  int32 answer = 4;
+}
+
+// Player structure
+message Player {
+  string playerName = 1;
+  int32 score = 2;
+}
+
+service QuizGameService {
+  rpc getQuiz(Empty) returns (QuizResponse);
+  rpc getQuestion(GetQuestionRequest) returns (Quiz);
+  rpc registerPlayer(RegisterPlayerRequest) returns (RegisterPlayerResponse);
+  rpc play(PlayRequest) returns (PlayResponse);
+  rpc getPlayerScores(Empty) returns (PlayerScoresResponse);
+}
+
+message Empty {}
+
+message QuizResponse {
+  repeated Quiz allQuizzes = 1;
+}
+
+message GetQuestionRequest {
+  int64 id = 1;
+}
+
+message RegisterPlayerRequest {
+  string playerName = 1;
+}
+
+message RegisterPlayerResponse {
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message PlayRequest {
+  string playerName = 1;
+  int64 quizId = 2;
+  int32 selectedAnswer = 3;
+}
+
+message PlayResponse {
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message PlayerScoresResponse {
+  repeated Player players = 1;
+}
