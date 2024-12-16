@@ -139,7 +139,6 @@ public class QuizGameService extends QuizGameServiceGrpc.QuizGameServiceImplBase
         for (QuizOuterClass.Player player : players) {
             response.addPlayers(player);
         }
-
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
